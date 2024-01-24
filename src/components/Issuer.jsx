@@ -1,3 +1,5 @@
+/* eslint-disable react/prop-types */
+
 import { useEffect, useState } from 'react';
 import { AutoComplete, DatePicker, Divider, Form, Input, Select } from 'antd';
 import moment from 'moment';
@@ -8,30 +10,14 @@ import { SubmitSection } from './issuer/SubmitSection';
 import { NewAccount } from './NewAccount';
 import { AccountFromPrivateKey } from './AccountFromPrivateKey';
 import { CopyButton } from './CopyButton.jsx';
-import PropTypes from 'prop-types';
 
-Issuer.propTypes = {
-  handleIssue: PropTypes.func.isRequired,
-  isSignatureGenerated: PropTypes.bool.isRequired,
-  generatedSignature: PropTypes.string.isRequired,
-  nationalityfield: PropTypes.string.isRequired,
-  subjectfield: PropTypes.string.isRequired,
-  issuer: PropTypes.string.isRequired,
-};
-
-const Issuer = ({
-  handleIssue,
-  isSignatureGenerated,
-  generatedSignature,
-  nationalityfield,
-  subjectfield,
-  issuer,
-}) => {
+const Issuer = ({ handleIssue, isSignatureGenerated, generatedSignature, nationalityfield, subjectfield, issuer }) => {
   const [showIssuer, setShowIssuer] = useState(true);
   const [form] = Form.useForm();
-  useEffect(() => {
-    if (!isSignatureGenerated) form.resetFields();
-  }, [form, generatedSignature, isSignatureGenerated]);
+  useEffect(()=>{
+    if(!isSignatureGenerated) form.resetFields();
+  }, [form, generatedSignature, isSignatureGenerated])
+  
 
   const onFinish = (values) => {
     handleIssue(values);
@@ -46,14 +32,12 @@ const Issuer = ({
     .map((key) => ({
       value: wasm.HashAlgorithm[key],
       label: key,
-    }));
+  }));
+
 
   return (
     <>
-      <ToggleButton
-        toggleIssuerForm={toggleIssuerForm}
-        showIssuer={showIssuer}
-      />
+      <ToggleButton toggleIssuerForm={toggleIssuerForm} showIssuer={showIssuer} />
       {showIssuer && (
         <>
           <Divider />
@@ -73,7 +57,9 @@ const Issuer = ({
           label="Hash type"
           name="hash_type"
           className="account-label-width"
-          rules={[{ required: true, message: 'Missing hash type' }]}
+          rules={[
+              { required: true, message: 'Missing hash type' }
+          ]}
         >
           <Select>
             {hashOptions.map((option) => (
@@ -90,16 +76,13 @@ const Issuer = ({
           className="account-label-width"
           rules={[
             { required: true, message: 'Missing subject' },
-            {
-              pattern: /^[a-zA-Z0-9_]{63,63}$/,
-              message: 'Input should be an address type',
-            },
+            { pattern: /^[a-zA-Z0-9_]{63,63}$/, message: 'Input should be an address type' },
           ]}
         >
-          <Input
-            addonAfter={<CopyButton data={subjectfield} />}
-            disabled={isSignatureGenerated}
-            placeholder="Enter a subject (e.g., 'address')"
+          <Input 
+            addonAfter={<CopyButton data={subjectfield} />} 
+            disabled={isSignatureGenerated} 
+            placeholder="Enter a subject (e.g., 'address')" 
           />
         </Form.Item>
 
@@ -115,33 +98,27 @@ const Issuer = ({
             format="YYYY-MM-DD"
             disabled={isSignatureGenerated}
             placeholder="Select DOB (e.g., YYYY-MM-DD)"
-            disabledDate={(current) =>
-              current && current > moment().endOf('day')
-            }
+            disabledDate={(current) => current && current > moment().endOf('day')}
           />
         </Form.Item>
 
         <Form.Item
-          label="Nationality"
-          name="nationality"
-          className="account-label-width"
-        >
-          <AutoComplete
-            style={{ width: '100%', textAlign: 'left' }}
-            disabled={isSignatureGenerated}
-            placeholder="Enter a nationality (e.g., 'American')"
-            filterOption={true}
-            options={nationalities}
+            label="Nationality"
+            name="nationality"
+            className="account-label-width"
           >
-            <Input
-              addonAfter={
-                <CopyButton
-                  data={wasm.get_field_from_value(nationalityfield)}
-                />
-              }
-            />
-          </AutoComplete>
-        </Form.Item>
+            <AutoComplete
+              style={{ width: '100%', textAlign: 'left' }}
+              disabled={isSignatureGenerated}
+              placeholder="Enter a nationality (e.g., 'American')"
+              filterOption={true}
+              options={nationalities}
+            >
+              <Input
+                addonAfter={<CopyButton data={wasm.get_field_from_value(nationalityfield)} />}
+              />
+            </AutoComplete>
+          </Form.Item>
 
         <Form.Item
           label="Expiration"
@@ -154,18 +131,18 @@ const Issuer = ({
             format="YYYY-MM-DD"
             disabled={isSignatureGenerated}
             placeholder="Select expiration date (e.g., YYYY-MM-DD)"
-            disabledDate={(current) =>
-              current && current < moment().endOf('day')
-            }
+            disabledDate={(current) => current && current < moment().endOf('day')}
           />
         </Form.Item>
-
+        
         <SubmitSection
           isSignatureGenerated={isSignatureGenerated}
           generatedSignature={generatedSignature}
           issuer={issuer}
         />
+
       </Form>
+
     </>
   );
 };
