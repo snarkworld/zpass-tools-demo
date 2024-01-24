@@ -50,9 +50,8 @@ Download and install from [Node.js](https://nodejs.org/en/download/).
    ```
 
 Enjoy using **zPass Tools**!
-
-<Disclaimer>
-#### Disclaimer
+  
+### Disclaimer
 
 #### Non-Production Build
 
@@ -71,5 +70,3 @@ This repository is for demonstration and educational purposes only and is not in
 - Feedback & Contributions: Contributions to enhance its educational value are welcome.
 
 By utilizing this code, you acknowledge this disclaimer, understanding its limitations for non-production use.
-
-</Disclaimer>
