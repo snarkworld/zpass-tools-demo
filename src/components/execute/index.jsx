@@ -11,7 +11,6 @@ import {
   Result,
   Select,
   Skeleton,
-  Switch,
 } from 'antd';
 import { LoadProgram } from './LoadProgram.jsx';
 import { CodeEditor } from './CodeEditor.jsx';
@@ -34,7 +33,6 @@ export const Execute = () => {
 
   const [form] = Form.useForm();
 
-  const [privateFee, setPrivateFee] = useState(false);
   const [selectValue, setSelectValue] = useState(null);
   useEffect(() => {
     if (selectValue) onLoadProgram('');
@@ -225,67 +223,6 @@ export const Execute = () => {
     setModalModalOpen(false);
   };
 
-  const [feeLoading, setFeeLoading] = useState(false);
-  const estimateFee = async () => {
-    try {
-      setModalModalOpen(true);
-      setLoading(true);
-      setFeeLoading(true);
-
-      const { program, functionName, inputs, peer_url, privateKey } =
-        form.getFieldsValue();
-      const requiredFields = {
-        program,
-        functionName,
-        inputs,
-        peer_url,
-        privateKey,
-      };
-
-      // Check if any required field is missing
-      const missingFieldNames = Object.entries(requiredFields)
-        .filter(([, value]) => !value)
-        .map(([key]) => key);
-
-      if (missingFieldNames.length > 0) {
-        throw new Error(
-          `Missing required fields: ${missingFieldNames.join(', ')}`
-        );
-      }
-
-      const result = await postMessagePromise(worker, {
-        type: 'ALEO_ESTIMATE_EXECUTION_FEE',
-        remoteProgram: program,
-        privateKey,
-        aleoFunction: functionName,
-        inputs: JSON.parse(inputs),
-        url: peer_url,
-      });
-
-      if (result.type === 'ERROR') {
-        throw new Error(result.errorMessage.toString());
-      }
-
-      form.resetFields(['fee']);
-      form.setFieldValue('fee', result.executionFee);
-      setModalResult({
-        status: 'success',
-        title: 'Fee Estimation Success!',
-        subTitle: `Fee set to: ${result.executionFee || 'Something went wrong...'}`,
-      });
-    } catch (err) {
-      setModalResult({
-        status: 'error',
-        title: 'Fee Estimation Error',
-        subTitle: `Error: ${err.toString() || 'Something went wrong...'}`,
-      });
-      form.setFieldValue('fee', '');
-    } finally {
-      setLoading(false);
-      setFeeLoading(false);
-    }
-  };
-
   return (
     <Card title="Execute Program">
       <Modal
@@ -360,7 +297,7 @@ export const Execute = () => {
           </Form.Item>
 
           <Divider dashed />
-          
+
           <Form.Item
             noStyle
             shouldUpdate={(prevValues, currentValues) =>
