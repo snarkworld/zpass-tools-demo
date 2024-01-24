@@ -52,23 +52,24 @@ Download and install from [Node.js](https://nodejs.org/en/download/).
 Enjoy using **zPass Tools**!
 
 <Disclaimer>
+#### Disclaimer
 
-### Non-Production Build
+#### Non-Production Build
 
 This repository is for demonstration and educational purposes only and is not intended for production use. It's a showcase of integrating advanced technologies like Aleo, WebAssembly, Rust, and Node.js.
 
-### Note:
+#### Note:
+- Security: May contain vulnerabilities unsuitable for a production environment.
+- Testing: Limited testing implies potential bugs or stability issues.
+- Maintenance: Updates or security patches are not guaranteed.
+- Purpose: Designed primarily for demonstration and education in advanced cryptographic and decentralized technologies.
 
-Security: May contain vulnerabilities unsuitable for a production environment.
-Testing: Limited testing implies potential bugs or stability issues.
-Maintenance: Updates or security patches are not guaranteed.
-Purpose: Designed primarily for demonstration and education in advanced cryptographic and decentralized technologies.
+#### Recommendations:
 
-### Recommendations:
+- Learning Tool: Ideal for understanding Aleo's blockchain technology and cryptographic functions.
+- Experimentation: A platform for testing and exploration, not for real-world application deployment.
+- Feedback & Contributions: Contributions to enhance its educational value are welcome.
 
-Learning Tool: Ideal for understanding Aleo's blockchain technology and cryptographic functions.
-Experimentation: A platform for testing and exploration, not for real-world application deployment.
-Feedback & Contributions: Contributions to enhance its educational value are welcome.
 By utilizing this code, you acknowledge this disclaimer, understanding its limitations for non-production use.
 
 </Disclaimer>
