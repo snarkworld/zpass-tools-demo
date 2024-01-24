@@ -1,4 +1,4 @@
-import { ConfigProvider, Layout as AntLayout, theme } from 'antd';
+import { Layout as AntLayout, ConfigProvider, theme } from 'antd';
 import IssuerApp from './pages/IssuerApp';
 import { Outlet } from 'react-router-dom';
 
