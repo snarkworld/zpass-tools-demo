@@ -1,0 +1,9 @@
+[issue]
+sig: signature = sign1h8g4ejh8zw5t630skw268p57ph68gww5l70hu56yhuvwxghh3yq26mls66978q0v7ksmfjh4gwtfvza59nr9psjxxyqeuztaja09xqg7f2zumcmur7plvvfrca9scpm03xwe0xgccau6m9ss9maan0wtqx8vk26s5200e3p2qfr67tcqgjrcqks593u404s8r4m0x2vuzufq528xj4k;
+msg: Credentials = Credentials {
+  issuer: aleo137h5z8g0a3sqvemn8vwt7286lrrq8azh2y5uxa638mtnwe427qys0dly66,
+  subject: aleo14w44zfrehup9g894j7tgeyz5gsjuxn0nfn09vd2fvpznrg85rs8skywkte,
+  dob: 946677600u32,
+  nationality: 4714535926995575150field,
+  expiry: 1703973600u32
+};

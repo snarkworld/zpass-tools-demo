@@ -1,0 +1,9 @@
+[verify]
+sig: signature = sign1n24euz5wmc8v3uuve99ag2546rkj2px5llphfml8re2h8kz07gpmgsx2k3y4d8rlx84w7nvmchhwjmrm2g9tq56ra0hy2d6wjewa6q8f7r3ha5jtug2jyj589saaesfgr207yvnx8qya6hs9k8lyptdap9detfpgjafy925s6jeh2g7k49ate9u583r8azzg598rd544qgts6pq6s26;
+msg: Credentials = Credentials {
+  issuer: aleo14w44zfrehup9g894j7tgeyz5gsjuxn0nfn09vd2fvpznrg85rs8skywkte,
+  subject: aleo14w44zfrehup9g894j7tgeyz5gsjuxn0nfn09vd2fvpznrg85rs8skywkte,
+  dob: 20231025field,
+  nationality: 0field,
+  expiry: 0field
+};

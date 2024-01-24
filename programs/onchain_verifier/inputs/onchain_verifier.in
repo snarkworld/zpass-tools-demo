@@ -1,0 +1,44 @@
+// The program input for onchain_verifier/src/main.leo
+[verify_dob]
+rec: SignedCredential = SignedCredential {
+    owner: aleo14w44zfrehup9g894j7tgeyz5gsjuxn0nfn09vd2fvpznrg85rs8skywkte,
+    issuer: aleo137h5z8g0a3sqvemn8vwt7286lrrq8azh2y5uxa638mtnwe427qys0dly66,
+    subject: aleo14w44zfrehup9g894j7tgeyz5gsjuxn0nfn09vd2fvpznrg85rs8skywkte,
+    dob: 946677600u32,
+    nationality: 4714535926995575150field,
+    expiry: 1703973600u32,
+    sig: sign1569cg7krgjp0x5nextmssqvqwqm0447gslng2rp2wlz6lzvfuuq2pj4f9jfw2ly9spklecghnk6ezyj9zfhnpeespp6tsqtzy89zgqg7f2zumcmur7plvvfrca9scpm03xwe0xgccau6m9ss9maan0wtqx8vk26s5200e3p2qfr67tcqgjrcqks593u404s8r4m0x2vuzufq5qhfe5f,
+    _nonce: 3460226360072003069806131597146721612716691515149407208239180499015461007539group,
+};
+dob: u32 = 946677600u32;
+currentDate: u32 = 1703970600u32;
+
+[verify_nationality]
+rec: SignedCredential = SignedCredential {
+    owner: aleo14w44zfrehup9g894j7tgeyz5gsjuxn0nfn09vd2fvpznrg85rs8skywkte,
+    issuer: aleo137h5z8g0a3sqvemn8vwt7286lrrq8azh2y5uxa638mtnwe427qys0dly66,
+    subject: aleo14w44zfrehup9g894j7tgeyz5gsjuxn0nfn09vd2fvpznrg85rs8skywkte,
+    dob: 946677600u32,
+    nationality: 4714535926995575150field,
+    expiry: 1703973600u32,
+    sig: sign1569cg7krgjp0x5nextmssqvqwqm0447gslng2rp2wlz6lzvfuuq2pj4f9jfw2ly9spklecghnk6ezyj9zfhnpeespp6tsqtzy89zgqg7f2zumcmur7plvvfrca9scpm03xwe0xgccau6m9ss9maan0wtqx8vk26s5200e3p2qfr67tcqgjrcqks593u404s8r4m0x2vuzufq5qhfe5f,
+    _nonce: 3460226360072003069806131597146721612716691515149407208239180499015461007539group,
+};
+nationality: field = 4714535926995575150field;
+currentDate: u32 = 1703970600u32;
+
+
+[verify_age_condition]
+rec: SignedCredential = SignedCredential {
+    owner: aleo14w44zfrehup9g894j7tgeyz5gsjuxn0nfn09vd2fvpznrg85rs8skywkte,
+    issuer: aleo137h5z8g0a3sqvemn8vwt7286lrrq8azh2y5uxa638mtnwe427qys0dly66,
+    subject: aleo14w44zfrehup9g894j7tgeyz5gsjuxn0nfn09vd2fvpznrg85rs8skywkte,
+    dob: 946677600u32,
+    nationality: 4714535926995575150field,
+    expiry: 1703973600u32,
+    sig: sign1569cg7krgjp0x5nextmssqvqwqm0447gslng2rp2wlz6lzvfuuq2pj4f9jfw2ly9spklecghnk6ezyj9zfhnpeespp6tsqtzy89zgqg7f2zumcmur7plvvfrca9scpm03xwe0xgccau6m9ss9maan0wtqx8vk26s5200e3p2qfr67tcqgjrcqks593u404s8r4m0x2vuzufq5qhfe5f,
+    _nonce: 3460226360072003069806131597146721612716691515149407208239180499015461007539group,
+};
+age: u32 = 18u32;
+condition: u8 = 0u8;
+currentDate: u32 = 1703970600u32;

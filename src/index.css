@@ -1,0 +1,95 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+
+/* Ant Layout Overrides */
+:where(.css-dev-only-do-not-override-rf5hxn).ant-layout,
+:where(.css-dev-only-do-not-override-rf5hxn).ant-layout .ant-layout-header,
+:where(.css-dev-only-do-not-override-rf5hxn).ant-layout .ant-layout-sider,
+:where(.css-dev-only-do-not-override-rf5hxn).ant-layout .ant-layout-footer,
+:where(.css-rf5hxn).ant-layout,
+:where(.css-rf5hxn).ant-layout .ant-layout-header,
+:where(.css-rf5hxn).ant-layout .ant-layout-sider,
+:where(.css-rf5hxn).ant-layout .ant-layout-footer {
+  background: #eeeeee !important;
+}
+
+/* Button Styles */
+.ant-btn-primary {
+  background-color: #3E00D5 !important;
+  border-color: #3E00D5 !important;
+}
+
+/* Select Styles */
+.ant-select-focused .ant-select-selector,
+.ant-select:hover .ant-select-selector {
+  border-color: #DDFF56 !important;
+}
+
+/* Input and Form Item Styles */
+.ant-form-item-control-input:focus .ant-input,
+.ant-form-item-control-input:hover .ant-input,
+.datepicker-hover:hover,
+.ant-btn:hover,
+.ant-btn:focus {
+  border-color: #DDFF56 !important;
+}
+
+/* DatePicker Styles */
+.ant-picker-focused .ant-picker-input > input:focus,
+.ant-picker-focused .ant-picker-input > input:hover,
+.ant-picker:hover .ant-picker-input > input:focus,
+.ant-picker:hover .ant-picker-input > input:hover {
+  border-color: #DDFF56 !important;
+  border-right-width: 1px !important;
+}
+
+/* DatePicker Styles */
+.ant-picker-focused .ant-picker-input > input {
+  border-color: #DDFF56;
+  border-right-width: 1px;
+}
+
+/* Add this to include hover state */
+.ant-picker:hover .ant-picker-input > input {
+  border-color: #DDFF56;
+  border-right-width: 1px;
+}
+
+/* More Layout and Element Overrides */
+:where(.css-dev-only-do-not-override-12k1gsx).ant-layout,
+:where(.css-dev-only-do-not-override-12k1gsx).ant-layout .ant-layout-header,
+:where(.css-dev-only-do-not-override-12k1gsx).ant-layout .ant-layout-sider,
+:where(.css-dev-only-do-not-override-12k1gsx).ant-layout .ant-layout-footer,
+:where(.css-12k1gsx).ant-layout,
+:where(.css-12k1gsx).ant-layout .ant-layout-header,
+:where(.css-12k1gsx).ant-layout .ant-layout-sider,
+:where(.css-12k1gsx).ant-layout .ant-layout-footer {
+  background: #444444 !important;
+}
+
+/* Further Specific Overrides */
+:where(.css-12k1gsx).ant-layout .ant-select-selector {
+  background: #272822 !important;
+}
+
+:where(.css-12k1gsx).ant-card,
+:where(.css-12k1gsx).ant-input-group {
+  background: #5b5b5b !important;
+}
+
+.account-label-width .ant-form-item-label {
+  text-align: left;
+  width: 100px;
+}
+
+.ant-layout-sider-children {
+  width: 100%;
+}

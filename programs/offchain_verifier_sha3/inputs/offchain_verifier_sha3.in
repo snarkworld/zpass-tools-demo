@@ -1,0 +1,10 @@
+// The program input for offchain_verifier_sha3/src/main.leo
+[verify]
+sig: signature = sign1s2r2lyn4dlwhgwwes3xvyvjguakpkqlh74fe8elvzm6s3axznyqvw76kp9kn334qcsjwuaqn742vayvn58gc5e7knqxhzvgsvcwukq8f7r3ha5jtug2jyj589saaesfgr207yvnx8qya6hs9k8lyptdap9detfpgjafy925s6jeh2g7k49ate9u583r8azzg598rd544qgts67xjtu3;
+msg: Credentials = Credentials {
+  issuer: aleo14w44zfrehup9g894j7tgeyz5gsjuxn0nfn09vd2fvpznrg85rs8skywkte,
+  subject: aleo19tm7aratsmc699levepkhlwzcq9972elu3wsdt6s4xyrtwg6quzs4cqhgc,
+  dob: 20231025field,
+  nationality: 4714535926995575150field,
+  expiry: 20231115field
+};
