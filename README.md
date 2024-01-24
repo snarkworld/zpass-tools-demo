@@ -1,4 +1,4 @@
-# zPass Tools
+# zPass Tools Demo
 
 zPass Tools integrates the innovative capabilities of WebAssembly (wasm) with Rust, Node.js, and Aleo, offering a unique toolkit that exemplifies state-of-the-art cryptographic functions and decentralized applications.
 
