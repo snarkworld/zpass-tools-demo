@@ -1,18 +1,18 @@
-import { useState } from "react";
-import constate from "constate";
+import { useState } from 'react';
+import constate from 'constate';
 
 function useGlobal() {
   const [global, setGlobal] = useState({});
 
   const upsertKeyAtGlobalState = (name) => {
-    setGlobal(prevState => ({...prevState, name}) )
-  }
+    setGlobal((prevState) => ({ ...prevState, name }));
+  };
 
   return {
     global,
     setGlobal,
-    upsertKeyAtGlobalState
-  }
+    upsertKeyAtGlobalState,
+  };
 }
 
 export const [GlobalProvider, useGlobalProvider] = constate(useGlobal);

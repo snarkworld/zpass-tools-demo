@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import WorkerContext from './WorkerContext';
 import PropTypes from 'prop-types';
 
-// eslint-disable-next-line react/prop-types
 const WorkerProvider = ({ children }) => {
   // State variables to keep track of worker, readiness, and loading status
   const [worker, setWorker] = useState(null);
@@ -15,7 +14,13 @@ const WorkerProvider = ({ children }) => {
 
     if (type === 'ALEO_WORKER_READY') {
       setWorkerReady(true);
-    } else if (['OFFLINE_EXECUTION_COMPLETED', 'EXECUTION_TRANSACTION_COMPLETED', 'ERROR'].includes(type)) {
+    } else if (
+      [
+        'OFFLINE_EXECUTION_COMPLETED',
+        'EXECUTION_TRANSACTION_COMPLETED',
+        'ERROR',
+      ].includes(type)
+    ) {
       setIsLoading(false);
     }
   };
@@ -69,7 +74,9 @@ const WorkerProvider = ({ children }) => {
   };
 
   return (
-    <WorkerContext.Provider value={{ workerReady, worker, postMessagePromise, isLoading }}>
+    <WorkerContext.Provider
+      value={{ workerReady, worker, postMessagePromise, isLoading }}
+    >
       {children}
     </WorkerContext.Provider>
   );

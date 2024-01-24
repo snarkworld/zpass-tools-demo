@@ -7,7 +7,7 @@ export const ToggleButton = ({ toggleIssuerForm, showIssuer }) => {
       onClick={toggleIssuerForm}
       style={{ backgroundColor: '#DDFF56', color: 'black' }}
     >
-      {showIssuer ? "Hide" : "Account Info"}
+      {showIssuer ? 'Hide' : 'Account Info'}
     </Button>
   );
 };

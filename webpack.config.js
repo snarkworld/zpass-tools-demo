@@ -1,26 +1,26 @@
-import CopyPlugin from "copy-webpack-plugin";
-import TerserPlugin from "terser-webpack-plugin";
-import HtmlWebpackPlugin from "html-webpack-plugin";
+import CopyPlugin from 'copy-webpack-plugin';
+import TerserPlugin from 'terser-webpack-plugin';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
 
-import path from "path";
+import path from 'path';
 
 const appConfig = {
-  mode: "production",
+  mode: 'production',
   entry: {
-    index: "./src/main.jsx",
+    index: './src/main.jsx',
   },
   output: {
-    path: path.resolve("dist"),
-    filename: "[name].bundle.js",
+    path: path.resolve('dist'),
+    filename: '[name].bundle.js',
   },
   resolve: {
-    extensions: ["", ".js", ".jsx", ".es6"]
+    extensions: ['', '.js', '.jsx', '.es6'],
   },
   devServer: {
     port: 3000,
     headers: {
-      "Cross-Origin-Opener-Policy": "same-origin",
-      "Cross-Origin-Embedder-Policy": "require-corp",
+      'Cross-Origin-Opener-Policy': 'same-origin',
+      'Cross-Origin-Embedder-Policy': 'require-corp',
     },
     client: {
       overlay: false,
@@ -32,32 +32,32 @@ const appConfig = {
         test: /\.(js|jsx)$/,
         exclude: /nodeModules/,
         use: {
-          loader: "babel-loader",
+          loader: 'babel-loader',
         },
       },
       {
         test: /\.css$/,
-        use: ["style-loader", "css-loader"],
+        use: ['style-loader', 'css-loader'],
       },
     ],
   },
   plugins: [
     new CopyPlugin({
-      patterns: [
-        { from: "public", to: "public" },
-      ],
+      patterns: [{ from: 'public', to: 'public' }],
     }),
     new HtmlWebpackPlugin({
-      template: "./index.html",
+      template: './index.html',
     }),
   ],
   optimization: {
     minimize: true,
-    minimizer: [new TerserPlugin({
-      terserOptions: {
-        module: true,
-      }
-    })],
+    minimizer: [
+      new TerserPlugin({
+        terserOptions: {
+          module: true,
+        },
+      }),
+    ],
   },
   performance: {
     hints: false,
@@ -71,7 +71,7 @@ const appConfig = {
     asyncWebAssembly: true,
     topLevelAwait: true,
   },
-  devtool: "source-map",
+  devtool: 'source-map',
 };
 
 export default [appConfig];

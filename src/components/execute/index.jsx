@@ -12,17 +12,18 @@ import {
   Select,
   Skeleton,
   Switch,
-} from "antd";
-import { LoadProgram } from "./LoadProgram.jsx";
-import { CodeEditor } from "./CodeEditor.jsx";
-import { useEffect, useState } from "react";
-import { useAccountProvider } from "../../contexts/account";
-import {useAleoWASM} from "../../hooks/aleo-wasm-hook";
+} from 'antd';
+import { LoadProgram } from './LoadProgram.jsx';
+import { CodeEditor } from './CodeEditor.jsx';
+import { useEffect, useState } from 'react';
+import { useAccountProvider } from '../../contexts/account';
+import { useAleoWASM } from '../../hooks/aleo-wasm-hook';
 import {
   SIGVERIFY_PROGRAM_KECCAK_256,
-  SIGVERIFY_PROGRAM_SHA3_256, SIGVERIFY_PROGRAM
-} from "../../consts.ts";
-import {useGlobalProvider} from "../../contexts/global.js";
+  SIGVERIFY_PROGRAM_SHA3_256,
+  SIGVERIFY_PROGRAM,
+} from '../../consts.ts';
+import { useGlobalProvider } from '../../contexts/global.js';
 
 const layout = { labelCol: { span: 4 }, wrapperCol: { span: 18 } };
 
@@ -36,17 +37,17 @@ export const Execute = () => {
   const [privateFee, setPrivateFee] = useState(false);
   const [selectValue, setSelectValue] = useState(null);
   useEffect(() => {
-    if(selectValue) onLoadProgram('');
-    if(selectValue) setFunctions([]);
-    if(selectValue) demoSelect();
-    if(selectValue) setSelectValue();
-    form.setFieldValue("privateKey", global.privateKey);
+    if (selectValue) onLoadProgram('');
+    if (selectValue) setFunctions([]);
+    if (selectValue) demoSelect();
+    if (selectValue) setSelectValue();
+    form.setFieldValue('privateKey', global.privateKey);
   }, [global]);
 
   const PROGRAM_MAP = {
-    "offchain_verifier": SIGVERIFY_PROGRAM,
-    "offchain_verifier_keccak256": SIGVERIFY_PROGRAM_KECCAK_256,
-    "offchain_verifier_sha3_256": SIGVERIFY_PROGRAM_SHA3_256,
+    offchain_verifier: SIGVERIFY_PROGRAM,
+    offchain_verifier_keccak256: SIGVERIFY_PROGRAM_KECCAK_256,
+    offchain_verifier_sha3_256: SIGVERIFY_PROGRAM_SHA3_256,
   };
 
   const demoSelect = async (value) => {
@@ -55,19 +56,17 @@ export const Execute = () => {
 
       if (program) {
         await onLoadProgram(program);
-        form.setFieldValue("manual_input", false);
-        form.setFieldValue("functionName", "verify");
+        form.setFieldValue('manual_input', false);
+        form.setFieldValue('functionName', 'verify');
       } else {
         await onLoadProgram('');
       }
 
-      if(value) setSelectValue(value);
-
+      if (value) setSelectValue(value);
     } catch (error) {
-      console.error("Error in demoSelect:", error);
+      console.error('Error in demoSelect:', error);
     }
   };
-
 
   const [worker, setWorker] = useState(null);
   useEffect(() => {
@@ -92,27 +91,29 @@ export const Execute = () => {
       fee_record,
       peer_url,
       execute_onchain,
-      privateKey
+      privateKey,
     } = values;
 
     const payload = {
       aleoFunction: functionName,
       inputs: JSON.parse(inputs),
-      privateKey: execute_onchain ? privateKey : account.privateKey().to_string()
+      privateKey: execute_onchain
+        ? privateKey
+        : account.privateKey().to_string(),
     };
 
     if (execute_onchain) {
       Object.assign(payload, {
-        type: "ALEO_EXECUTE_PROGRAM_ON_CHAIN",
+        type: 'ALEO_EXECUTE_PROGRAM_ON_CHAIN',
         remoteProgram: program,
         fee,
         feeRecord: fee_record,
-        url: peer_url
+        url: peer_url,
       });
     } else {
       Object.assign(payload, {
-        type: "ALEO_EXECUTE_PROGRAM_LOCAL",
-        localProgram: program
+        type: 'ALEO_EXECUTE_PROGRAM_LOCAL',
+        localProgram: program,
       });
     }
 
@@ -121,13 +122,12 @@ export const Execute = () => {
     } catch (error) {
       setLoading(false);
       setModalResult({
-        status: "error",
-        title: "Function Execution Error",
-        subTitle: `Error: ${error || "Something went wrong..."}`,
+        status: 'error',
+        title: 'Function Execution Error',
+        subTitle: `Error: ${error || 'Something went wrong...'}`,
       });
     }
   };
-
 
   function postMessagePromise(worker, message) {
     return new Promise((resolve, reject) => {
@@ -143,31 +143,32 @@ export const Execute = () => {
 
   function spawnWorker() {
     let worker = new Worker(
-      new URL("../../workers/worker.js", import.meta.url),
-      { type: "module" },
+      new URL('../../workers/worker.js', import.meta.url),
+      { type: 'module' }
     );
-    worker.addEventListener("message", (ev) => {
-      if (ev.data.type == "OFFLINE_EXECUTION_COMPLETED") {
+    worker.addEventListener('message', (ev) => {
+      if (ev.data.type == 'OFFLINE_EXECUTION_COMPLETED') {
         setLoading(false);
         setModalResult({
-          title: "Execution Successsful!",
-          status: "success",
+          title: 'Execution Successsful!',
+          status: 'success',
           subTitle: `Outputs: ${ev.data.outputs.outputs}`,
         });
-      } else if (ev.data.type == "EXECUTION_TRANSACTION_COMPLETED") {
+      } else if (ev.data.type == 'EXECUTION_TRANSACTION_COMPLETED') {
         const transactionId = ev.data.executeTransaction;
         setLoading(false);
         setModalResult({
-          title: "On-Chain Execution Successsful!",
-          status: "success",
+          title: 'On-Chain Execution Successsful!',
+          status: 'success',
           subTitle: `Transaction ID: ${transactionId}`,
         });
-      } else if (ev.data.type == "ERROR") {
+      } else if (ev.data.type == 'ERROR') {
         setLoading(false);
         setModalResult({
-          status: "error",
-          title: "Function Execution Error",
-          subTitle: `Error: ${ev.data.errorMessage || "Something went wrong..."
+          status: 'error',
+          title: 'Function Execution Error',
+          subTitle: `Error: ${
+            ev.data.errorMessage || 'Something went wrong...'
           }`,
         });
       }
@@ -204,7 +205,6 @@ export const Execute = () => {
     //offchain_verifier.aleo verify
     const functionNames = processedProgram.getFunctions();
     const functionItems = functionNames.map((func) => {
-
       const functionInputs = processedProgram.getFunctionInputs(func);
       return {
         key: func,
@@ -218,8 +218,8 @@ export const Execute = () => {
   const [modalOpen, setModalModalOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [modalResult, setModalResult] = useState({
-    status: "warning",
-    subTitle: "Sorry, something went wrong.",
+    status: 'warning',
+    subTitle: 'Sorry, something went wrong.',
   });
   const handleOk = () => {
     setModalModalOpen(false);
@@ -232,8 +232,15 @@ export const Execute = () => {
       setLoading(true);
       setFeeLoading(true);
 
-      const { program, functionName, inputs, peer_url, privateKey } = form.getFieldsValue();
-      const requiredFields = { program, functionName, inputs, peer_url, privateKey };
+      const { program, functionName, inputs, peer_url, privateKey } =
+        form.getFieldsValue();
+      const requiredFields = {
+        program,
+        functionName,
+        inputs,
+        peer_url,
+        privateKey,
+      };
 
       // Check if any required field is missing
       const missingFieldNames = Object.entries(requiredFields)
@@ -241,11 +248,13 @@ export const Execute = () => {
         .map(([key]) => key);
 
       if (missingFieldNames.length > 0) {
-        throw new Error(`Missing required fields: ${missingFieldNames.join(', ')}`);
+        throw new Error(
+          `Missing required fields: ${missingFieldNames.join(', ')}`
+        );
       }
 
       const result = await postMessagePromise(worker, {
-        type: "ALEO_ESTIMATE_EXECUTION_FEE",
+        type: 'ALEO_ESTIMATE_EXECUTION_FEE',
         remoteProgram: program,
         privateKey,
         aleoFunction: functionName,
@@ -253,45 +262,38 @@ export const Execute = () => {
         url: peer_url,
       });
 
-      if (result.type === "ERROR") {
+      if (result.type === 'ERROR') {
         throw new Error(result.errorMessage.toString());
       }
 
-      form.resetFields(["fee"]);
-      form.setFieldValue("fee", result.executionFee);
+      form.resetFields(['fee']);
+      form.setFieldValue('fee', result.executionFee);
       setModalResult({
-        status: "success",
-        title: "Fee Estimation Success!",
-        subTitle: `Fee set to: ${result.executionFee || "Something went wrong..."}`,
+        status: 'success',
+        title: 'Fee Estimation Success!',
+        subTitle: `Fee set to: ${result.executionFee || 'Something went wrong...'}`,
       });
-
     } catch (err) {
       setModalResult({
-        status: "error",
-        title: "Fee Estimation Error",
-        subTitle: `Error: ${err.toString() || "Something went wrong..."}`,
+        status: 'error',
+        title: 'Fee Estimation Error',
+        subTitle: `Error: ${err.toString() || 'Something went wrong...'}`,
       });
-      form.setFieldValue("fee", "");
+      form.setFieldValue('fee', '');
     } finally {
       setLoading(false);
       setFeeLoading(false);
-
     }
   };
 
-
   return (
-    <Card
-      title="Execute Program"
-
-
-    >
+    <Card title="Execute Program">
       <Modal
         title="Executing program..."
         open={modalOpen}
         onOk={handleOk}
         confirmLoading={loading}
-        cancelButtonProps={{ style: { display: "none" } }}
+        cancelButtonProps={{ style: { display: 'none' } }}
         closeIcon={false}
         maskClosable={false}
       >
@@ -300,20 +302,16 @@ export const Execute = () => {
 
       <Form.Provider
         onFormFinish={(name, info) => {
-          if (name !== "execute") {
-            form.setFieldValue("functionName", name);
+          if (name !== 'execute') {
+            form.setFieldValue('functionName', name);
             let translatedArray = info.values.inputs.map((item) => {
-              return JSON.stringify(item).replaceAll('"', "");
+              return JSON.stringify(item).replaceAll('"', '');
             });
-            form.setFieldValue(
-              "inputs",
-              JSON.stringify(translatedArray),
-            );
+            form.setFieldValue('inputs', JSON.stringify(translatedArray));
             form.submit();
           }
         }}
       >
-
         <Form
           form={form}
           name="execute"
@@ -326,33 +324,37 @@ export const Execute = () => {
             placeholder="Select a demo"
             onChange={demoSelect}
             value={selectValue}
-            style={{"width": "250px"}}
+            style={{ width: '250px' }}
             options={[
               {
-                value: "offchain_verifier",
-                label: "offchain_verifier.aleo",
+                value: 'offchain_verifier',
+                label: 'offchain_verifier.aleo',
               },
               {
-                value: "offchain_verifier_sha3_256",
-                label: "offchain_verifier_sha3_256.aleo",
+                value: 'offchain_verifier_sha3_256',
+                label: 'offchain_verifier_sha3_256.aleo',
               },
               {
-                value: "offchain_verifier_keccak256",
-                label: "offchain_verifier_keccak256.aleo",
+                value: 'offchain_verifier_keccak256',
+                label: 'offchain_verifier_keccak256.aleo',
               },
             ]}
           />
-          <Divider dashed/>
-          <LoadProgram clearSelect={()=> setSelectValue()} onResponse={onLoadProgram} />
-          <Form.Item style={{ textAlign: "justify" }}
-                     label="Program"
-                     name="program"
-                     rules={[
-                       {
-                         required: true,
-                         message: "Please input or load an Aleo program",
-                       },
-                     ]}
+          <Divider dashed />
+          <LoadProgram
+            clearSelect={() => setSelectValue()}
+            onResponse={onLoadProgram}
+          />
+          <Form.Item
+            style={{ textAlign: 'justify' }}
+            label="Program"
+            name="program"
+            rules={[
+              {
+                required: true,
+                message: 'Please input or load an Aleo program',
+              },
+            ]}
           >
             <CodeEditor onChange={onProgramEdit} />
           </Form.Item>
@@ -372,8 +374,7 @@ export const Execute = () => {
           <Form.Item
             noStyle
             shouldUpdate={(prevValues, currentValues) =>
-              prevValues.execute_onchain !==
-              currentValues.execute_onchain
+              prevValues.execute_onchain !== currentValues.execute_onchain
             }
           >
             {({ getFieldValue }) => (
@@ -381,16 +382,12 @@ export const Execute = () => {
                 <Form.Item
                   label="Private Key"
                   name="privateKey"
-                  hidden={!getFieldValue("execute_onchain")}
+                  hidden={!getFieldValue('execute_onchain')}
                   initialValue={global.privateKey}
                   rules={[
                     {
-                      required:
-                        getFieldValue(
-                          "execute_onchain",
-                        ),
-                      message:
-                        "Private key needed for on-chain execution",
+                      required: getFieldValue('execute_onchain'),
+                      message: 'Private key needed for on-chain execution',
                     },
                   ]}
                 >
@@ -406,23 +403,19 @@ export const Execute = () => {
                   label="Peer URL"
                   name="peer_url"
                   initialValue="https://api.explorer.aleo.org/v1"
-                  hidden={!getFieldValue("execute_onchain")}
+                  hidden={!getFieldValue('execute_onchain')}
                 >
                   <Input />
                 </Form.Item>
                 <Form.Item
                   label="Fee"
                   name="fee"
-                  hidden={!getFieldValue("execute_onchain")}
+                  hidden={!getFieldValue('execute_onchain')}
                   tooltip="Fee estimation is experimental and may not represent a correct estimate on any current or future network"
                   rules={[
                     {
-                      required:
-                        getFieldValue(
-                          "execute_onchain"
-                        ),
-                      message:
-                        "Fee needed for on-chain execution",
+                      required: getFieldValue('execute_onchain'),
+                      message: 'Fee needed for on-chain execution',
                     },
                   ]}
                 >
@@ -437,7 +430,7 @@ export const Execute = () => {
                   name="private_fee"
                   valuePropName="checked"
                   initialValue={privateFee}
-                  hidden={!getFieldValue("execute_onchain")}
+                  hidden={!getFieldValue('execute_onchain')}
                   style={{ textAlign: 'left' }}
                 >
                   <Switch onChange={setPrivateFee} />
@@ -449,8 +442,7 @@ export const Execute = () => {
                   rules={[
                     {
                       required: privateFee,
-                      message:
-                        "Fee record needed for on-chain execution",
+                      message: 'Fee record needed for on-chain execution',
                     },
                   ]}
                 >
@@ -471,8 +463,7 @@ export const Execute = () => {
           <Form.Item
             noStyle
             shouldUpdate={(prevValues, currentValues) =>
-              prevValues.manual_input !==
-              currentValues.manual_input
+              prevValues.manual_input !== currentValues.manual_input
             }
           >
             {({ getFieldValue }) => (
@@ -480,14 +471,14 @@ export const Execute = () => {
                 <Form.Item
                   label="Function"
                   name="functionName"
-                  hidden={!getFieldValue("manual_input")}
+                  hidden={!getFieldValue('manual_input')}
                 >
                   <Input />
                 </Form.Item>
                 <Form.Item
                   label="Inputs"
                   name="inputs"
-                  hidden={!getFieldValue("manual_input")}
+                  hidden={!getFieldValue('manual_input')}
                 >
                   <Input.TextArea />
                 </Form.Item>
@@ -500,7 +491,7 @@ export const Execute = () => {
                       offset: 4,
                     },
                   }}
-                  hidden={!getFieldValue("manual_input")}
+                  hidden={!getFieldValue('manual_input')}
                 >
                   <Button type="primary" htmlType="submit">
                     Run
@@ -521,7 +512,14 @@ export const Execute = () => {
   );
 };
 
-const renderInput = (input, inputIndex, nameArray = [], func, global, selectedProgram) => {
+const renderInput = (
+  input,
+  inputIndex,
+  nameArray = [],
+  func,
+  global,
+  selectedProgram
+) => {
   if (input.members) {
     const members = input.members;
     return (
@@ -537,7 +535,7 @@ const renderInput = (input, inputIndex, nameArray = [], func, global, selectedPr
             func,
             global,
             selectedProgram
-          ),
+          )
         )}
       </div>
     );
@@ -552,9 +550,13 @@ const renderInput = (input, inputIndex, nameArray = [], func, global, selectedPr
       let scope = { ...global };
 
       // Check if selectedProgram matches any of the conditions
-      if (selectedProgram.includes("offchain") || selectedProgram.includes("onchain_issuer")) {
+      if (
+        selectedProgram.includes('offchain') ||
+        selectedProgram.includes('onchain_issuer')
+      ) {
         scope.r0 = signature;
-        scope.r1 = typeof(hash_type) !== 'undefined' ? `${hash_type}u8` : undefined;
+        scope.r1 =
+          typeof hash_type !== 'undefined' ? `${hash_type}u8` : undefined;
       }
       return scope[label] || undefined;
     };
@@ -563,7 +565,7 @@ const renderInput = (input, inputIndex, nameArray = [], func, global, selectedPr
         key={inputIndex}
         label={label}
         name={name}
-        rules={[{ required: true, message: "Please input a value" }]}
+        rules={[{ required: true, message: 'Please input a value' }]}
         initialValue={getValue(label)}
       >
         <Input placeholder={`${input.type}`} />
@@ -574,15 +576,17 @@ const renderInput = (input, inputIndex, nameArray = [], func, global, selectedPr
 
 const functionForm = (func, funcInputs, global, processedProgram) => {
   return (
-    <Form
-      name={func}
-      autoComplete="off"
-      scrollToFirstError="true"
-      {...layout}
-    >
+    <Form name={func} autoComplete="off" scrollToFirstError="true" {...layout}>
       {funcInputs.length > 0 ? (
         funcInputs.map((input, inputIndex) =>
-          renderInput(input, inputIndex, ["inputs"], func, global, processedProgram.id()),
+          renderInput(
+            input,
+            inputIndex,
+            ['inputs'],
+            func,
+            global,
+            processedProgram.id()
+          )
         )
       ) : (
         <Form.Item

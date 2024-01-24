@@ -1,12 +1,15 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
 }
 
 /* Ant Layout Overrides */
@@ -23,14 +26,14 @@ code {
 
 /* Button Styles */
 .ant-btn-primary {
-  background-color: #3E00D5 !important;
-  border-color: #3E00D5 !important;
+  background-color: #3e00d5 !important;
+  border-color: #3e00d5 !important;
 }
 
 /* Select Styles */
 .ant-select-focused .ant-select-selector,
 .ant-select:hover .ant-select-selector {
-  border-color: #DDFF56 !important;
+  border-color: #ddff56 !important;
 }
 
 /* Input and Form Item Styles */
@@ -39,7 +42,7 @@ code {
 .datepicker-hover:hover,
 .ant-btn:hover,
 .ant-btn:focus {
-  border-color: #DDFF56 !important;
+  border-color: #ddff56 !important;
 }
 
 /* DatePicker Styles */
@@ -47,19 +50,19 @@ code {
 .ant-picker-focused .ant-picker-input > input:hover,
 .ant-picker:hover .ant-picker-input > input:focus,
 .ant-picker:hover .ant-picker-input > input:hover {
-  border-color: #DDFF56 !important;
+  border-color: #ddff56 !important;
   border-right-width: 1px !important;
 }
 
 /* DatePicker Styles */
 .ant-picker-focused .ant-picker-input > input {
-  border-color: #DDFF56;
+  border-color: #ddff56;
   border-right-width: 1px;
 }
 
 /* Add this to include hover state */
 .ant-picker:hover .ant-picker-input > input {
-  border-color: #DDFF56;
+  border-color: #ddff56;
   border-right-width: 1px;
 }
 

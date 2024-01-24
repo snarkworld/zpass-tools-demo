@@ -1,5 +1,5 @@
-import { Form, Input, Row, Col, Button, Space } from "antd";
-import { useAccountProvider } from "../contexts/account";
+import { Form, Input, Row, Col, Button, Space } from 'antd';
+import { useAccountProvider } from '../contexts/account';
 import '../index.css';
 
 export const AccountFromPrivateKey = () => {
@@ -16,14 +16,12 @@ export const AccountFromPrivateKey = () => {
       !account && (
         <Space direction="vertical" size="middle" style={{ display: 'flex' }}>
           <Row justify="center">
-            <Col>
-              Load Account from Private Key
-            </Col>
+            <Col>Load Account from Private Key</Col>
           </Row>
           <Form onFinish={onFinish}>
-            <Form.Item 
-              label="Private Key" 
-              name="privateKey" 
+            <Form.Item
+              label="Private Key"
+              name="privateKey"
               rules={[{ required: true, message: 'Missing Private Key' }]}
             >
               <Input
