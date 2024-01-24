@@ -50,7 +50,7 @@ Download and install from [Node.js](https://nodejs.org/en/download/).
    ```
 
 Enjoy using **zPass Tools**!
-  
+
 ## Disclaimer
 
 #### Non-Production Build
@@ -58,6 +58,7 @@ Enjoy using **zPass Tools**!
 This repository is for demonstration and educational purposes only and is not intended for production use. It's a showcase of integrating advanced technologies like Aleo, WebAssembly, Rust, and Node.js.
 
 #### Note:
+
 - Security: May contain vulnerabilities unsuitable for a production environment.
 - Testing: Limited testing implies potential bugs or stability issues.
 - Maintenance: Updates or security patches are not guaranteed.
