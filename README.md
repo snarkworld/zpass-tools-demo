@@ -26,7 +26,7 @@ Download and install from [Node.js](https://nodejs.org/en/download/).
   curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | sh
   ```
 
-### Setup Steps
+## Setup Steps
 
 1. **Install Node Modules**
 
