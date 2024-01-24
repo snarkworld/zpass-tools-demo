@@ -35,7 +35,7 @@ Download and install from [Node.js](https://nodejs.org/en/download/).
    ```
 
 2. **Build wasm Package**
-   Navigate to the issuer directory and build the wasm package targeting a bundler:
+   Navigate to the issuer directory and build the wasm package:
 
    ```bash
    cd issuer
