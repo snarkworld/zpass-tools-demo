@@ -51,7 +51,7 @@ Download and install from [Node.js](https://nodejs.org/en/download/).
 
 Enjoy using **zPass Tools**!
   
-### Disclaimer
+## Disclaimer
 
 #### Non-Production Build
 
