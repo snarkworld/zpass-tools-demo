@@ -148,7 +148,7 @@ export const Execute = () => {
       if (ev.data.type == 'OFFLINE_EXECUTION_COMPLETED') {
         setLoading(false);
         setModalResult({
-          title: 'Execution Successsful!',
+          title: 'Execution Successful!',
           status: 'success',
           subTitle: `Outputs: ${ev.data.outputs.outputs}`,
         });
@@ -156,7 +156,7 @@ export const Execute = () => {
         const transactionId = ev.data.executeTransaction;
         setLoading(false);
         setModalResult({
-          title: 'On-Chain Execution Successsful!',
+          title: 'On-Chain Execution Successful!',
           status: 'success',
           subTitle: `Transaction ID: ${transactionId}`,
         });
